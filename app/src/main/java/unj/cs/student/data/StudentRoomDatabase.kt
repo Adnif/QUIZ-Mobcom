@@ -4,7 +4,7 @@ import android.content.Context
 import androidx.room.Database
 import androidx.room.*
 
-@Database(entities = [Student::class], version = 1, exportSchema = false)
+@Database(entities = [Student::class], version = 2, exportSchema = false)
 abstract class StudentRoomDatabase : RoomDatabase() {
     abstract fun studentDao() : StudentDao
 
