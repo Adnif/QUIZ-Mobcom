@@ -17,7 +17,7 @@ interface StudentDao {
     @Query("SELECT * from student")
     fun getAll(): Flow<List<Student>>
 
-    @Query("SELECT * from student WHERE id = :id")
+    @Query("SELECT * from student WHERE _id = :id")
     fun getStudentById(id: Int): Flow<List<Student>>
 
     @Query("SELECT * from student WHERE ids = :ids")

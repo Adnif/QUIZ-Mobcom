@@ -1,5 +1,6 @@
 package unj.cs.student
 
+import unj.cs.student.StudentViewModel
 import android.os.Bundle
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
@@ -9,6 +10,7 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.activityViewModels
+import androidx.fragment.app.viewModels
 import androidx.navigation.NavDirections
 import androidx.navigation.findNavController
 import com.google.android.material.textfield.TextInputLayout
@@ -16,6 +18,8 @@ import unj.cs.student.data.Student
 import unj.cs.student.databinding.FragmentStudentFormBinding
 import kotlin.properties.Delegates
 import androidx.navigation.fragment.navArgs
+
+
 
 class StudentFormFragment : Fragment() {
     companion object{
@@ -27,8 +31,7 @@ class StudentFormFragment : Fragment() {
     private val binding get() = _binding!!
     private lateinit var buttonText: String
     private var index by Delegates.notNull<Int>()
-    private val navigationArgs: StudentFormFragmentArgs by navArgs()
-    private val viewModel: StudentViewModel by activityViewModels{}
+    private val viewModel: StudentViewModel by viewModels{ StudentViewModel.Factory }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -72,7 +75,6 @@ class StudentFormFragment : Fragment() {
                     Toast.makeText(context, "IDs and Name can't be empty!", Toast.LENGTH_LONG).show()
                 } else {
                     val student = Student(
-                        this.navigationArgs.index,
                         idEditText.text.toString(),
                         nameEditText.text.toString()
                     )
@@ -93,12 +95,11 @@ class StudentFormFragment : Fragment() {
                     Toast.makeText(context, "IDs and Name can't be empty!", Toast.LENGTH_LONG).show()
                 } else {
                     val student = Student(
-                        this.navigationArgs.index,
                         idEditText.text.toString(),
                         nameEditText.text.toString()
                     )
                     // listStudents.add(student)
-                    viewModel.addNewStudent(idEditText.text.toString(),nameEditText.text.toString())
+                    viewModel.addStudent(student)
                     val action: NavDirections = StudentFormFragmentDirections.actionStudentFormFragmentToStudentListFragment()
                     view.findNavController().navigate(action)
                     Toast.makeText(context, "${student.name} was added!", Toast.LENGTH_LONG).show()

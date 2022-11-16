@@ -1,5 +1,6 @@
 package unj.cs.student
 
+import unj.cs.student.StudentViewModel
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
@@ -15,7 +16,7 @@ import unj.cs.student.data.Student
 class StudentAdapter(viewModel: StudentViewModel): RecyclerView.Adapter<StudentAdapter.StudentViewHolder>(){
     private val viewModel: StudentViewModel = viewModel
     init{
-        viewModel.fullStudent()
+        viewModel.loadStudent()
         if(viewModel.studentList.value == null){
             viewModel._studentList.value = mutableListOf<Student>()
         }
@@ -40,12 +41,12 @@ class StudentAdapter(viewModel: StudentViewModel): RecyclerView.Adapter<StudentA
         val student: Student = viewModel.getStudent(position)
         val ids:String = student.ids
         val name:String = student.name
-        val _id:Int = student.id
+        val _id:Int = student._id
         holder.idTextView.text = ids
         holder.nameTextView.text = name
 
         holder.itemView.setOnClickListener(){
-            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment(argStudentId = ids, argStudentName = name, argId = _id)
+            val action = StudentListFragmentDirections.actionStudentListFragmentToStudentFormFragment(position, "Update Student")
             holder.view.findNavController().navigate(action)
         }
     }
