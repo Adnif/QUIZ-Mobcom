@@ -1,4 +1,4 @@
 # QUIZ-Mobcom
-Ahmad Bani Faqih
-Chiko Tridipa Siswoyo
+Ahmad Bani Faqih \n 
+Chiko Tridipa Siswoyo \n
 Muhammad Alif Budiman
